@@ -2,11 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                sh 'git clone https://github.com/GitUsmanBaig/Jenkins.git'
-            }
-        }
+       stage('Checkout') {
+    steps {
+        sh '''
+        if [ ! -d "Jenkins" ]; then
+            git clone https://github.com/GitUsmanBaig/Jenkins.git
+        else
+            echo "Directory already exists, skipping clone."
+        fi
+        '''
+    }
+}
+
 
         stage('Install Dependencies') {
             steps {
@@ -37,7 +44,7 @@ pipeline {
         stage('Dockerize and Deploy') {
             steps {
                 script {
-                    sh 'docker-compose up -d'
+                    sh 'echo docker-compose up -d'
                 }
             }
         }
