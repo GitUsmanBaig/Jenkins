@@ -1,27 +1,31 @@
-pipeline {
-
-    agent any
-    
-    stages {
-         stage('build') {
-          steps {
-              sh 'npm install'
-            }
-          }
-        
-        stage('Docker Comopse Up') {
-            steps {
-               
-                    sh "docker compose up"
-                
-            }
-        }
-         stage('kill') {
-            steps {
-               
-                    sh "docker compose down"
-                
-            }
+stage('Checkout') {
+    steps {
+        git 'https://github.com/GitUsmanBaig/Jenkins'
+    }
+}
+stage('Install Dependencies') {
+    steps {
+        script {
+            sh 'npm install'
         }
     }
 }
+
+
+stage('Build') {
+    steps {
+        script {
+            sh 'npm run build'
+        }
+    }
+}
+
+stage('Test') {
+    steps {
+        script {
+            sh 'npm test'
+        }
+    }
+}
+
+
