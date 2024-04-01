@@ -1,6 +1,6 @@
 stage('Checkout') {
     steps {
-        git 'https://github.com/GitUsmanBaig/Jenkins'
+        echo 'https://github.com/GitUsmanBaig/Jenkins'
     }
 }
 stage('Install Dependencies') {
