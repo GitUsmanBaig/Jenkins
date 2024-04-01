@@ -26,7 +26,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo 'npm run build'
+                    sh 'npm run build'
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    echo 'npm run test'
+                    sh 'npm run test'
                 }
             }
         }
@@ -44,7 +44,6 @@ pipeline {
         stage('Dockerize and Deploy') {
             steps {
                 script {
-                    sh 'sleep 2m'
                     sh 'echo docker-compose up -d'
                 }
             }
